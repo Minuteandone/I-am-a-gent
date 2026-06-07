@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Agent Chat</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">GitHub Pages ready</p>
+          <h1 id="page-title">AI Agent Chat</h1>
+          <p class="lede">
+            A static website for chatting with a local <strong id="model-name">gpt-oss-120b</strong>
+            agent. Messages and reactions stay in your browser, while agent turns call your local
+            OpenAI-compatible endpoint directly.
+          </p>
+        </div>
+        <div class="status-card" aria-live="polite">
+          <span class="pulse"></span>
+          <div>
+            <strong>Agent endpoint</strong>
+            <span id="endpoint-label">Not configured</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <article class="chat-panel" aria-label="Chat messages">
+          <div class="panel-header">
+            <div>
+              <h2>Shared chat</h2>
+              <p>Send messages, react with emoji, then ask the local agent to respond.</p>
+            </div>
+            <div class="panel-actions">
+              <button id="agent-button" class="secondary" type="button">Ask agent</button>
+              <button id="clear-button" class="ghost" type="button">Clear</button>
+            </div>
+          </div>
+
+          <div id="messages" class="messages" aria-live="polite"></div>
+
+          <form id="message-form" class="composer">
+            <label class="sr-only" for="message-input">Message</label>
+            <input id="message-input" name="message" autocomplete="off" placeholder="Type a message for the chat…" required />
+            <button type="submit">Send</button>
+          </form>
+        </article>
+
+        <aside class="tools-panel" aria-labelledby="tools-title">
+          <section class="config-card" aria-labelledby="config-title">
+            <h2 id="config-title">Local model settings</h2>
+            <form id="config-form" class="config-form">
+              <label>
+                <span>OpenAI-compatible base URL</span>
+                <input id="base-url" type="url" placeholder="http://localhost:11434/v1" required />
+              </label>
+              <label>
+                <span>Model</span>
+                <input id="model" type="text" placeholder="gpt-oss-120b" required />
+              </label>
+              <label>
+                <span>API key</span>
+                <input id="api-key" type="password" placeholder="local-gpt-oss" />
+              </label>
+              <button type="submit">Save settings</button>
+            </form>
+            <p class="hint">
+              Settings are saved only in this browser. Your local server must allow browser requests from this page.
+            </p>
+          </section>
+
+          <section aria-labelledby="tools-title">
+            <h2 id="tools-title">Agent tools</h2>
+            <p>The agent receives OpenAI-compatible function tools mapped to these chat actions:</p>
+            <ul class="tool-list">
+              <li><code>chat.check</code><span>Check messages by time range and number.</span></li>
+              <li><code>chat.search</code><span>Search for specific words or phrases.</span></li>
+              <li><code>chat.react</code><span>Add emoji reactions to messages.</span></li>
+              <li><code>chat.reactions</code><span>Check emoji reactions on messages.</span></li>
+              <li><code>chat.send</code><span>Send an agent message into the chat.</span></li>
+            </ul>
+          </section>
+
+          <section class="tool-log" aria-labelledby="tool-log-title">
+            <h3 id="tool-log-title">Tool activity</h3>
+            <div id="tool-events" class="events">No tool calls yet.</div>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <template id="message-template">
+      <article class="message">
+        <div class="message-meta">
+          <strong class="author"></strong>
+          <span class="created"></span>
+        </div>
+        <p class="content"></p>
+        <div class="message-footer">
+          <div class="reaction-row"></div>
+          <div class="reaction-actions" aria-label="React to message">
+            <button type="button" data-emoji="👍">👍</button>
+            <button type="button" data-emoji="❤️">❤️</button>
+            <button type="button" data-emoji="👀">👀</button>
+            <button type="button" data-emoji="🚀">🚀</button>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>

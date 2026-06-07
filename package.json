@@ -1,0 +1,10 @@
+{
+  "name": "i-am-a-gent",
+  "version": "1.0.0",
+  "description": "GitHub Pages-ready static GPT-OSS-120B chat agent interface with chat tools.",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 3000",
+    "test": "node --check app.js"
+  }
+}
