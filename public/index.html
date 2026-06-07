@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Agent Chat</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Local agent workspace</p>
+          <h1 id="page-title">AI Chat Interface</h1>
+          <p class="lede">
+            Chat with a local <strong id="model-name">gpt-oss-120b</strong> agent that can inspect chat history,
+            search messages, react with emoji, read reactions, and send messages with tool calls.
+          </p>
+        </div>
+        <div class="status-card" aria-live="polite">
+          <span class="pulse"></span>
+          <div>
+            <strong>Local endpoint</strong>
+            <span id="endpoint">Loading…</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <article class="chat-panel" aria-label="Chat messages">
+          <div class="panel-header">
+            <div>
+              <h2>Shared chat</h2>
+              <p>Send messages, then ask the agent to respond or use tools.</p>
+            </div>
+            <button id="agent-button" class="secondary" type="button">Ask agent</button>
+          </div>
+
+          <div id="messages" class="messages" aria-live="polite"></div>
+
+          <form id="message-form" class="composer">
+            <label class="sr-only" for="message-input">Message</label>
+            <input id="message-input" name="message" autocomplete="off" placeholder="Type a message for the chat…" required />
+            <button type="submit">Send</button>
+          </form>
+        </article>
+
+        <aside class="tools-panel" aria-labelledby="tools-title">
+          <h2 id="tools-title">Agent tools</h2>
+          <p>The agent receives these OpenAI-compatible tool definitions:</p>
+          <ul class="tool-list">
+            <li><code>chat.check</code><span>Check messages by time range and number.</span></li>
+            <li><code>chat.search</code><span>Search for specific words or phrases.</span></li>
+            <li><code>chat.react</code><span>Add emoji reactions to messages.</span></li>
+            <li><code>chat.reactions</code><span>Check emoji reactions on messages.</span></li>
+            <li><code>chat.send</code><span>Send an agent message into the chat.</span></li>
+          </ul>
+
+          <div class="tool-log">
+            <h3>Tool activity</h3>
+            <div id="tool-events" class="events">No tool calls yet.</div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <template id="message-template">
+      <article class="message">
+        <div class="message-meta">
+          <strong class="author"></strong>
+          <span class="created"></span>
+        </div>
+        <p class="content"></p>
+        <div class="message-footer">
+          <div class="reaction-row"></div>
+          <div class="reaction-actions" aria-label="React to message">
+            <button type="button" data-emoji="👍">👍</button>
+            <button type="button" data-emoji="❤️">❤️</button>
+            <button type="button" data-emoji="👀">👀</button>
+            <button type="button" data-emoji="🚀">🚀</button>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
