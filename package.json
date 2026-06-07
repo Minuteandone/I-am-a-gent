@@ -1,0 +1,11 @@
+{
+  "name": "i-am-a-gent",
+  "version": "1.0.0",
+  "description": "Local GPT-OSS-120B chat agent interface with chat tools.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --check server.js && node --check public/app.js"
+  }
+}
